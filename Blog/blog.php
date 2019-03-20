@@ -24,15 +24,15 @@
          $dt_debut = date_create_from_format('Y-m-d H:i:s', $ligne['Date']); 
          echo "<h3>".$ligne['Titre']."</h3>"; 
          echo "<h4>Le ".$dt_debut->format('d/m/Y H:i:s')."</h4>"; 
-         echo "<div style='width:400px'>".$ligne['Commentaire']." </div>"; 
-         echo "<hr />"; 
+         echo "<div style='width:400px'>".$ligne['Commentaire']." </div>";  
          echo "<a href='supprArticle.php?Date=".$ligne['Date']."'>Supprimer</a>";
          echo "   ";
          echo "<a href='editArticle.php?Date=".$ligne['Date']."&Titre=".$ligne['Titre']."&Commentaire=".$ligne['Commentaire']."'>Modifier</a>";
+         echo "<hr />";
       } 
    } 
    ?> 
    <br /> 
-   <a href="formulaireAjout.php" >retour à la page d'insertion</a> 
+   <a href="formulaireAjout.php" >Aller à la page d'insertion</a> 
 </body> 
 </html>
