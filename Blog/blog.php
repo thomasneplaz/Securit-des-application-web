@@ -9,28 +9,41 @@
    <h2>Blog</h2> 
    <hr /> 
    <?php 
-   $connect = mysqli_connect("localhost", "root", "test", "blog"); 
+   //$connect = mysqli_connect("localhost", "root", "test", "blog"); 
+   $dsn = 'mysql:dbname=blog;host=localhost';
+   $user = 'root';
+   $password = 'test';
    /* Vérification de la connexion */ 
-   if (!$connect) { 
-      echo "Échec de la connexion : ".mysqli_connect_error(); 
-      exit(); 
-   } 
+   try 
+   {
+      $connection = new PDO($dsn, $user, $password);
+   }
+   catch( PDOException $Exception ) 
+   {   
+      echo "Unable to connect to database.";
+      exit;
+   }
  
    $requete = "SELECT * FROM Article ORDER BY Date"; 
-   if ($resultat = mysqli_query($connect,$requete)) { 
-      date_default_timezone_set('Europe/Paris'); 
+
+   $res = $connection->prepare($requete);
+   $res->execute();
+   //if ($resultat = mysqli_query($connect,$requete)) { 
+   date_default_timezone_set('Europe/Paris'); 
       /* fetch le tableau associatif */ 
-      while ($ligne = mysqli_fetch_assoc($resultat)) { 
-         $dt_debut = date_create_from_format('Y-m-d H:i:s', $ligne['Date']); 
-         echo "<h3>".$ligne['Titre']."</h3>"; 
-         echo "<h4>Le ".$dt_debut->format('d/m/Y H:i:s')."</h4>"; 
-         echo "<div style='width:400px'>".$ligne['Commentaire']." </div>";  
-         echo "<a href='supprArticle.php?Date=".$ligne['Date']."'>Supprimer</a>";
-         echo "   ";
-         echo "<a href='editArticle.php?Date=".$ligne['Date']."&Titre=".$ligne['Titre']."&Commentaire=".$ligne['Commentaire']."'>Modifier</a>";
-         echo "<hr />";
-      } 
-   } 
+   $ligneArray = $res->fetchAll(PDO::FETCH_ASSOC);
+   foreach ($ligneArray as $ligne) { 
+      //$dt_debut = date_create_from_format('Y-m-d H:i:s', ); 
+      echo "<h3>".$ligne['Titre']."</h3>"; 
+      echo "<h4>Le ".$ligne['Date']."</h4>"; 
+      echo "<div style='width:400px'>".$ligne['Commentaire']." </div>";  
+      echo "   ";
+      echo "<a href='supprArticle.php?Date=".$ligne['Date']."'>Supprimer</a>";
+      echo "   ";
+      echo "<a href='editArticle.php?Date=".$ligne['Date']."&Titre=".$ligne['Titre']."&Commentaire=".$ligne['Commentaire']."'>Modifier</a>";
+      echo "<hr />";
+   }
+   //} 
    ?> 
    <br /> 
    <a href="formulaireAjout.php" >Aller à la page d'insertion</a> 

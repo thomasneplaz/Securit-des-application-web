@@ -6,19 +6,26 @@
    </head> 
 <body> 
 <?php 
-$connect = mysqli_connect("localhost", "root", "test", "blog"); 
-
+$dsn = 'mysql:dbname=blog;host=localhost';
+$user = 'root';
+$password = 'test';
 /* Vérification de la connexion */ 
-if (!$connect) { 
-   echo "Échec de la connexion : ".mysqli_connect_error(); 
-   exit(); 
-} 
+try 
+{
+   $connection = new PDO($dsn, $user, $password);
+}
+catch( PDOException $Exception ) 
+{   
+   echo "Unable to connect to database.";
+   exit;
+}
  
-$requete = "INSERT INTO Article (Titre, Date, Commentaire, Photo) VALUES ('".htmlentities(addslashes($_POST['titre']), ENT_QUOTES)."','".date("Y-m-d H:i:s")."','".htmlentities (addslashes($_POST['commentaire']), ENT_QUOTES)."', '')"; 
-$resultat = mysqli_query($connect,$requete); 
-$identifiant = mysqli_insert_id($connect); 
+$requete = "INSERT INTO Article (Titre, Date, Commentaire, Photo) VALUES ('".htmlentities(addslashes( $_POST['titre'] ), ENT_QUOTES)."','".date("Y-m-d H:i:s")."','".htmlentities (addslashes( $_POST['commentaire'] ), ENT_QUOTES)."', '')"; 
+$res = $connection->prepare($requete);
+$res->execute();
+//$identifiant = mysqli_insert_id($connect); 
 /* Fermeture de la connexion */ 
-mysqli_close($connect); 
+$connection = null;
  
 if ($identifiant != 0) { 
    echo "<br />Ajout du commentaire réussi.<br /><br />"; 
