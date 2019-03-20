@@ -16,7 +16,7 @@
       exit(); 
    } 
  
-   $requete = "SELECT * FROM article ORDER BY Date"; 
+   $requete = "SELECT * FROM Article ORDER BY Date"; 
    if ($resultat = mysqli_query($connect,$requete)) { 
       date_default_timezone_set('Europe/Paris'); 
       /* fetch le tableau associatif */ 
@@ -25,10 +25,10 @@
          echo "<h3>".$ligne['Titre']."</h3>"; 
          echo "<h4>Le ".$dt_debut->format('d/m/Y H:i:s')."</h4>"; 
          echo "<div style='width:400px'>".$ligne['Commentaire']." </div>"; 
-         if ($ligne['Photo'] != "") { 
-            echo "<img src='photos/".$ligne['Photo']."' width='200px' height='200px'/>"; 
-         } 
          echo "<hr />"; 
+         echo "<a href='supprArticle.php?Date=".$ligne['Date']."'>Supprimer</a>";
+         echo "   ";
+         echo "<a href='editArticle.php?Date=".$ligne['Date']."&Titre=".$ligne['Titre']."&Commentaire=".$ligne['Commentaire']."'>Modifier</a>";
       } 
    } 
    ?> 

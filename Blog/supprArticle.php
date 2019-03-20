@@ -14,19 +14,19 @@ if (!$connect) {
    exit(); 
 } 
  
-$requete = "INSERT INTO Article (Titre, Date, Commentaire, Photo) VALUES ('".htmlentities(addslashes($_POST['titre']), ENT_QUOTES)."','".date("Y-m-d H:i:s")."','".htmlentities (addslashes($_POST['commentaire']), ENT_QUOTES)."', '')"; 
+$requete = "DELETE FROM Article WHERE Date = '".$_GET['Date']."'"; 
 $resultat = mysqli_query($connect,$requete); 
 $identifiant = mysqli_insert_id($connect); 
 /* Fermeture de la connexion */ 
 mysqli_close($connect); 
  
 if ($identifiant != 0) { 
-   echo "<br />Ajout du commentaire réussi.<br /><br />"; 
+   echo "<br /> Suppression du commentaire réussi.<br /><br />"; 
 } 
 else { 
-   echo "<br />Le commentaire n'a pas pu être ajouté.<br /><br />"; 
+   echo "<br />Le commentaire n'a pas pu être supprimé.<br /><br />"; 
 } 
 ?> 
-<a href="formulaireAjout.php" >retour à la page d'ajout d'articles</a> 
+<a href="blog.php" >retour à la page des articles</a> 
 </body> 
 </html>
