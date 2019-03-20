@@ -27,8 +27,11 @@ Pour le site slash-group :
 * Rien n'a été fait sur ce point pour la mettre en place
 
 
-## Faille a) Brute Force
+## Faille
 ### exploitation
-explication + résultats ...
+Projet de Bilel REHALHA
+Test File inclusion en local : n'a pas fonctionné
+
+
 ### sécurisation
 explication ...
