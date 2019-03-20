@@ -6,8 +6,8 @@
    </head> 
 <body> 
 <?php 
-$connect = mysqli_connect("localhost", "root", "0000", "blog"); 
- 
+$connect = mysqli_connect("localhost", "root", "test", "blog"); 
+
 /* Vérification de la connexion */ 
 if (!$connect) { 
    echo "Échec de la connexion : ".mysqli_connect_error(); 
