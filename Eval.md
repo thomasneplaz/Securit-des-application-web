@@ -18,8 +18,8 @@
 ### Bonne pratique
 
 * Il faudrait utiliser le protocole HTTP/2 pour des raisons de sécurité et de performance.
-* Il faut ajouter une balise rel="noopener" ou rel="noreferrer" pour tout les liens externes afin de sécuriser l'application et d'améliorer les performances.
-* Il manque la balise "<doctype >" sur la page, il faut la rajouter.
+* Il faut ajouter une balise ```rel="noopener"``` ou ```rel="noreferrer"``` pour tout les liens externes afin de sécuriser l'application et d'améliorer les performances.
+* Il manque la balise ```<doctype >``` sur la page, il faut la rajouter.
 
 ### SEO
 
@@ -48,18 +48,18 @@
 
 ## 5. Exploiter la faille “SQL Injection” de manière manuelle (c’est à dire sans SQLMap). Lister toutes les tables présentes sur la base de données. Vous décrirez précisément étapes par étapes comment vous avez procédé. Expliquer quel pourrait-être l’impact de cette attaque. Comment pourrait-on s’en protéger ?
 
-* J'ai commencé par mettre une ' pour voir si le champs était vulnérable. J'ai pu ensuite voir que la requête passait dans l'url, j'ai donc ajouté un ?id=a pour pouvoir passer une autre commande derrière. Ensuite, j'ai donc ajouté mon select pour pouvoir faire passer les valeurs que je souhaitait: UNION SELECT "prénom", "nom";--
+* J'ai commencé par mettre une ' pour voir si le champs était vulnérable. J'ai pu ensuite voir que la requête passait dans l'url, j'ai donc ajouté un ```?id=a``` pour pouvoir passer une autre commande derrière. Ensuite, j'ai donc ajouté mon select pour pouvoir faire passer les valeurs que je souhaitait: ```UNION SELECT "prénom", "nom";--```
 * Avec cette attaque, il est possible de remonter tout le schéma de base de données ainsi que les informations qui sont stocké dedans. Il est aussi possible de se connecter sur une application sans avoir d'identifiant ou de mot de passe.
 * Pour s'en protéger, il est bon de bien échappé les appostrophe ou autre caractères spéciaux qui pourraient être utilisé pour faire des requêtes.
 
 ## 6. Exploiter la faille “SQL Injection (Blind)” avec SQLMap. Vous décrirez précisément quelles commandes vous avez utilisez et pourquoi. Quelle est la spécificité d’une injection SQL en mode “aveugle” ?
 
-* j'ai lancé la commande dans un terminal : python sqlmap.py -u http://localhost/vulnerabilities/sqli_blind/?id=a&Submit=Submit
+* j'ai lancé la commande dans un terminal : `python sqlmap.py -u http://localhost/vulnerabilities/sqli_blind/?id=a&Submit=Submit`
 * En mode blind, on ne voit pas vraiment de changement dans la page car ce qui nous intéresse ce sont les headers des requêtes qui sont faites pour savoir comment est faite la base et ainsi la mapper totalement.
 
 ## 7. Exploiter la faille “XSS Reflected”. Modifier le comportement ou l’aspect de la page. Vous décrirez précisément étapes par étapes comment vous avez procédé. Expliquer quel pourrait-être l’impact de cette attaque. Comment pourrait-on s’en protéger ?
 
-* Pour voir comment fonctionnait le champs, je lui ai juste passer ""; pour voir ce qu'il me retournait. Puis suite à la réponse, je lui ai passé <script>alert("hop");</script>, ainsi à l'exécution je fais apparaitre une pop-up
+* Pour voir comment fonctionnait le champs, je lui ai juste passer ""; pour voir ce qu'il me retournait. Puis suite à la réponse, je lui ai passé `<script>alert("hop");</script>`, ainsi à l'exécution je fais apparaitre une pop-up
 * On peut ainsi faire en sorte que les utilisateur soient redirigé ailleurs ou bien corrompre leur utilisation de l'application (fishing). Elle permet aussi de pouvoir récupérer des informations sur les utilisateurs sans leur consentement ou bien leur envoyer du code malicieux.
 * pour s'en protéger, il faut échapper toutes les balises php ou html afin que tout ressorte en texte et ne soit pas interprété par le navigateur.
 
