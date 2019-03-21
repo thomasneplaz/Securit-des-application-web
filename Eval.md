@@ -37,7 +37,7 @@
 
 ## 3. Exploiter la faille “Command Injection” sur http://localhost/vulnerabilities/exec/ pour afficher le fichier /etc/passwd et la liste des connexions actives sur le serveur. Décrivez votre procédure ainsi que toute les commandes utilisées (même celles ayant échouées). Expliquer quel pourrait-être l’impact de cette attaque. Comment pourrait-on s’en protéger ? Bonus: Expliquer la différence entre un “bind shell” et un “reverse shell”. Pourquoi est-il plus efficace d’utiliser un reverse shell ?
 
-* J'ai entré dans le champs de texte, la commande 0.0.0.0 | cat ../../../../../../../../../../etc/passwd && w. Ainsi, je l'ai fait pinguer tout de suite sur une IP mais juste derrière j'ai pu lui demander de me donner tout le contenu du fichier passwd. Il va aussi me récupérer tous les utilisateurs qui sont actuellement connecté au serveur avec la commande 
+* J'ai entré dans le champs de texte, la commande ```0.0.0.0 | cat ../../../../../../../../../../etc/passwd && w```. Ainsi, je l'ai fait pinguer tout de suite sur une IP mais juste derrière j'ai pu lui demander de me donner tout le contenu du fichier passwd. Il va aussi me récupérer tous les utilisateurs qui sont actuellement connecté au serveur avec la commande 
 * Cette attaque permet de récupérer tous les mots de passe des utilisateurs sur le serveur.
 * Pour se protéger de ce type d'attaque, il est recommander de ne pas avoir de fonctionnalité dans l'application web qui se serve des commandes système. Sinon, il faut bien vérifier que ce qui est envoyé match avec ce qui est attendu pour être exécuté. Il suffit donc de faire une regex avant d'exécuter la commande pour être tranquille.
 
