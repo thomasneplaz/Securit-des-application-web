@@ -15,7 +15,7 @@
 * Le contraste entre le fond et le texte n'est pas assez marqué pour les éléments de type "a", il faut changer la couleur de fond ou d'écriture pour que ce soit plus lisible pour les personnes dont la vue peut être moins bonne.
 * La balise html ne possède pas d'attribu "lang", il faut en ajouter un afin de facilité la traduction de la page par divers outil de lecture d'écran.
 
-### Bonne pratique 
+### Bonne pratique
 
 * Il faudrait utiliser le protocole HTTP/2 pour des raisons de sécurité et de performance.
 * Il faut ajouter une balise rel="noopener" ou rel="noreferrer" pour tout les liens externes afin de sécuriser l'application et d'améliorer les performances.
@@ -29,7 +29,7 @@
 * Il faut ajouter pour tout les liens une balise "alt" afin que tout les liens possèdent un texte alternatif pour les lecteurs d'écran. Il faut que le texte soit court mais exlique bien l'utilité du lien.
 * Il faut permettre aux navigateur de référencer la page, cela se fait dans le fichier robot.txt, il faut permettre aux robots de pouvoir lire la page pour qu'elle puisse ressortir dans les résultats de recherche.
 
-## 2. Réaliser un brute force sur http://localhost avec l’outil Dirbuster pour trouver des fichiers et répertoires cachés. Un des fichiers peut nous apporter beaucoup d’informations sur la configuration de l’application et du serveur, quel est son nom (s’il a été trouvé) ? Expliquer quel est l’objectif de cette attaque. Comment pourrait-on s’en protéger ?
+## 2. Réaliser un brute force sur http://localhost avec l’outil Dirbuster pour trouver des fichiers et répertoires cachés. Un des fichiers peut nous apporter beaucoup d’informations sur la configuration de l’application et du serveur, quel est son nom (s’il a été trouvé) ? Expliquer quel est l’objectif de cette attaque. Comment pourrait-on s’en protéger ?
 
 * Le nom du serveur est : Apache 2.0 Handler
 * Ce type d'attaque permet de nous donner l'architecture du serveur et comment est organisé l'application sur celui-ci.
@@ -57,18 +57,18 @@
 * j'ai lancé la commande dans un terminal : python sqlmap.py -u http://localhost/vulnerabilities/sqli_blind/?id=a&Submit=Submit
 * En mode blind, on ne voit pas vraiment de changement dans la page car ce qui nous intéresse ce sont les headers des requêtes qui sont faites pour savoir comment est faite la base et ainsi la mapper totalement.
 
-## 7. Exploiter la faille “XSS Reflected”. Modifier le comportement ou l’aspect de la page. Vous décrirez précisément étapes par étapes comment vous avez procédé. Expliquer quel pourrait-être l’impact de cette attaque. Comment pourrait-on s’en protéger ?
+## 7. Exploiter la faille “XSS Reflected”. Modifier le comportement ou l’aspect de la page. Vous décrirez précisément étapes par étapes comment vous avez procédé. Expliquer quel pourrait-être l’impact de cette attaque. Comment pourrait-on s’en protéger ?
 
 * Pour voir comment fonctionnait le champs, je lui ai juste passer ""; pour voir ce qu'il me retournait. Puis suite à la réponse, je lui ai passé <script>alert("hop");</script>, ainsi à l'exécution je fais apparaitre une pop-up
 * On peut ainsi faire en sorte que les utilisateur soient redirigé ailleurs ou bien corrompre leur utilisation de l'application (fishing). Elle permet aussi de pouvoir récupérer des informations sur les utilisateurs sans leur consentement ou bien leur envoyer du code malicieux.
 * pour s'en protéger, il faut échapper toutes les balises php ou html afin que tout ressorte en texte et ne soit pas interprété par le navigateur.
 
-## 8. Exploiter la faille “XSS Stored”. Modifier le comportement ou l’aspect de la page. Vous décrirez précisément étapes par étapes comment vous avez procédé. Pourquoi une XSS stockées est-elle plus impactante qu’une volatile ?
+## 8. Exploiter la faille “XSS Stored”. Modifier le comportement ou l’aspect de la page. Vous décrirez précisément étapes par étapes comment vous avez procédé. Pourquoi une XSS stockées est-elle plus impactante qu’une volatile ?
 
 * j'ai fait la même manipulation que pour la faille XSS Reflected en mettant le code dans le champs de message ainsi à chaque actualisation mon script se déclenche.
 * Car elles restent sur la base de données jusqu'à ce qu'elle soit reset ou bien que le code inséré soit manuellement retiré. Il peut donc agir longtemps et sur tout les utilisateur tant qu'il n'est pas détecté.
 
-## 9. (Bonus) Que signifie DIA (ou CIA en anglais) ?
+## 9. (Bonus) Que signifie DIA (ou CIA en anglais) ?
 
 * La DIA est la Defense Intelligence Agency.
 
