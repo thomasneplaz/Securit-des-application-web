@@ -48,7 +48,7 @@
 
 ## 5. Exploiter la faille “SQL Injection” de manière manuelle (c’est à dire sans SQLMap). Lister toutes les tables présentes sur la base de données. Vous décrirez précisément étapes par étapes comment vous avez procédé. Expliquer quel pourrait-être l’impact de cette attaque. Comment pourrait-on s’en protéger ?
 
-* J'ai commencé par mettre une ' pour voir si le champs était vulnérable. J'ai pu ensuite voir que la requête passait dans l'url, j'ai donc ajouté un ```?id=a``` pour pouvoir passer une autre commande derrière. Ensuite, j'ai donc ajouté mon select pour pouvoir faire passer les valeurs que je souhaitait: ```UNION SELECT "prénom", "nom";--```
+* J'ai commencé par mettre une ' pour voir si le champs était vulnérable. J'ai pu ensuite voir que la requête passait dans l'url, j'ai donc ajouté un ```?id=a``` pour pouvoir passer une autre commande derrière. Ensuite, j'ai donc ajouté mon select pour pouvoir faire passer les valeurs que je souhaitait: ```UNION SELECT "prénom", "nom";--```. Pour avoir les tables de la base, il a donc fallut que je fasse cette commande ` UNION SELECT (SELECT GROUP_CONCAT(TABLE_NAME) FROM information_schema.TABLES), "";-- -&Submit=Submit`.
 * Avec cette attaque, il est possible de remonter tout le schéma de base de données ainsi que les informations qui sont stocké dedans. Il est aussi possible de se connecter sur une application sans avoir d'identifiant ou de mot de passe.
 * Pour s'en protéger, il est bon de bien échappé les appostrophe ou autre caractères spéciaux qui pourraient être utilisé pour faire des requêtes.
 
