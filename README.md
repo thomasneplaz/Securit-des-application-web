@@ -29,9 +29,24 @@ Pour le site slash-group :
 
 ## Faille
 ### exploitation
-####Projet de Bilel REHALHA
+Projet de Bilel REHAHLA
+
 Test File inclusion en local : n'a pas fonctionné
 
 
 ### sécurisation
-explication ...
+* Pour sécuriser mon application, j'ai utilisé des prepare pour toutes les requètes de CRUD
+* Dans les requête je me suis servie de htmlentities pour échapper les caractères et balise
+* Je n'ai pas de connexion pour le moment, je ne peux donc pas sécursé la connexion, le temps de connexion, la récupération de mot de passe avec un token unique, ou bien le hachage des mots de passe avec un salage
+
+### A2 - Broken Auht / Session Management Administrative portal
+* Pour entrer sur la page blqué en admin, il faut juste faire passer la variable dans l'url à 1
+
+### A1 - Injection / PHP code injection
+* Pour utiliser cette faille, il faut changer le contenu du message dans l'url pour ajouter à la place : ""; + toute autre commande php telle que readfile("../../../../../../etc/passwd") pour pouvoir avoir la liste de tout les mots de passe
+
+### A1 - Injection / SQL injection - Stored (blog)
+* Pour se servir de l'injection sql dans ce cas, il faut que l'on passe : hop',(SELECT version()))-- , ainsi on peut avoir la version de la base, puis en remplaçant version par database, on peut avoir le nom de la base et de là on peut rechercher toute les informations sur la base.
+
+### A1 - Injection / SQL injection - (POST/SELECT)
+...
